@@ -9,24 +9,24 @@
         "id": "smartphone",
         "nome": "Smartphone",
         "preco": 1299,
-        "img": "./api/produtos/notebook/smartphone.jpg"
+        "img": "./api/produtos/smartphone/smartphone.jpg"
     },
     {
         "id": "tablet",
         "nome": "Tablet",
         "preco": 3200,
-        "img": "./api/produtos/notebook/tablet.jpg"
+        "img": "./api/produtos/tablet/tablet.jpg"
     },
     {
         "id": "smartwatch",
         "nome": "Smartwatch",
         "preco": 100,
-        "img": "./api/produtos/notebook/smartwatch.jpg"
+        "img": "./api/produtos/smartwatch/smartwatch.jpg"
     },
     {
         "id": "speaker",
         "nome": "Speaker",
         "preco": 4500,
-        "img": "./api/produtos/notebook/speaker.jpg"
+        "img": "./api/produtos/speaker/speaker.jpg"
     }
 ]
