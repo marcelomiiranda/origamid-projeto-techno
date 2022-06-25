@@ -7,13 +7,11 @@ createApp({
             produtos: {},
         }
     },
-    methods: {
-        fetchProdutos() {
-            fetch('./api/produtos/produtos.json')
-                .then(resp => resp.json())
-                .then(produtos => {
-                    this.produtos = produtos
-                })
-        }
+    mounted() {
+        fetch('./api/produtos.json')
+            .then(resp => resp.json())
+            .then(produtos => {
+                this.produtos = produtos
+            })
     }
 }).mount("#app")
