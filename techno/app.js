@@ -4,14 +4,24 @@ createApp({
     data() {
         return {
             products: {},
+            product: {},
         }
     },
-    mounted() {
-        fetch('./api/products.json')
+    methods: {
+        getProducts() {
+            fetch('./api/products.json')
+                .then(resp => resp.json())
+                .then(products => {
+                    this.products = products
+                })
+        },
+        getProduct(id){
+            fetch(`./api/products/${id}/dados.json`)
             .then(resp => resp.json())
-            .then(products => {
-                this.products = products
+            .then(product => {
+                this.product = product
             })
+        }
     },
     watch: {
         products(){
@@ -20,4 +30,7 @@ createApp({
             })
         }
     },
+    created() {
+        this.getProducts()
+    }
 }).mount("#app")

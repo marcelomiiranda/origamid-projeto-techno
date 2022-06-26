@@ -11,9 +11,9 @@
 </head>
 <body>
     <div id="app">
-        
+        {{product}}
         <section class="products">
-            <div v-for="product in products" :key="product.id" class="product">
+            <div v-for="product in products" :key="product.id" class="product" @click="getProduct(product.id)">
                 <img :src="product.img" :alt="product.name" class="product_img" />
 
                 <div class="product_info">
