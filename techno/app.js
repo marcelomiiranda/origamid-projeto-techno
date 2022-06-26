@@ -5,6 +5,7 @@ createApp({
         return {
             products: {},
             product: {},
+            modalHasProduct: false,
         }
     },
     methods: {
@@ -21,6 +22,7 @@ createApp({
             .then(product => {
                 this.product = product
             })
+            this.modalHasProduct = true
         }
     },
     watch: {
