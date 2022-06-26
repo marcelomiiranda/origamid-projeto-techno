@@ -3,15 +3,21 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            helloWorld: "olá mundo!",
-            produtos: {},
+            products: {},
         }
     },
     mounted() {
-        fetch('./api/produtos.json')
+        fetch('./api/products.json')
             .then(resp => resp.json())
-            .then(produtos => {
-                this.produtos = produtos
+            .then(products => {
+                this.products = products
             })
-    }
+    },
+    watch: {
+        products(){
+            this.products.map(item => {
+                item.price = item.price.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
+            })
+        }
+    },
 }).mount("#app")
