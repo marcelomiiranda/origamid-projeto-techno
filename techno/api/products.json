@@ -14,7 +14,7 @@
     {
         "id": "tablet",
         "name": "Tablet",
-        "price": 3200,
+        "price": 899,
         "img": "./api/products/tablet/tablet.jpg"
     },
     {
@@ -26,7 +26,7 @@
     {
         "id": "speaker",
         "name": "Speaker",
-        "price": 4500,
+        "price": 599,
         "img": "./api/products/speaker/speaker.jpg"
     }
 ]

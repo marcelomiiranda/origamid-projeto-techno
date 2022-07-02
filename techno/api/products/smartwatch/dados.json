@@ -1,7 +1,7 @@
 {
   "id": "smartwatch",
   "name": "Smartwatch",
-  "price": 1199,
+  "price": 100,
   "description": "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a necessidade de renovação processual causa impacto indireto na reavaliação do orçamento setorial.",
   "inventory": 5,
   "img": "./api/products/smartwatch/smartwatch-foto.jpg",

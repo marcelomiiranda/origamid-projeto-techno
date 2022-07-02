@@ -7,14 +7,14 @@
   "img": "./api/products/notebook/notebook-foto.jpg",
   "reviews": [
     {
-      "name": "Fábio",
-      "stars": 5,
+      "name": "Rodolpho",
+      "stars": 3,
       "description": "Gostei muito do produto, atendeu todas as minhas necessidades"
     },
     {
       "name": "Fábio",
       "stars": 5,
-      "description": "Gostei muito do produto, atendeu todas as minhas necessidades"
+      "description": "Gostei muito do produto, muito bom!"
     }
   ]
 }
