@@ -23,7 +23,17 @@ createApp({
                 this.product = product
             })
             this.modalHasProduct = true
-        }
+        },
+        closeModal({target, currentTarget}){
+            if (target === currentTarget) this.modalHasProduct = false
+        },
+        openModal(id){
+            this.getProduct(id)
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        },
     },
     watch: {
         products(){
