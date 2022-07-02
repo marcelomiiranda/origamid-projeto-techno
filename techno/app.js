@@ -6,6 +6,8 @@ createApp({
             products: {},
             product: {},
             modalHasProduct: false,
+            cart: [],
+            cartTotal: 0,
         }
     },
     methods: {
@@ -34,6 +36,28 @@ createApp({
                 behavior: "smooth"
             })
         },
+        addItemToCart(product){
+            const { id, name, price } = product
+
+            this.product.inventory -= 1
+            this.cart.push({id, name, price})
+            this.cartTotal += price
+        },
+        removeItemFromCart(product){
+            const { id, price } = product
+
+            this.product.inventory += 1
+            this.cart.splice(id, 1)
+            this.cartTotal -= price
+        },
+        checkProductInCart(product){
+            if (this.cart.length > 0)
+            {
+                return this.cart.find(item => item.id === product.id)
+            }
+
+            return false
+        }
     },
     watch: {
         products(){
