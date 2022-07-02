@@ -11,7 +11,25 @@
 </head>
 <body>
     <div id="app">
-        
+
+        <header class="header">
+            <img src="./assets/techno.svg" alt="techno" class="logo"/>
+            <div class="cart_menu">
+                <p>{{cartTotal}} | {{cart.length}}</p>
+            </div>
+        </header>
+
+        <section class="products">
+            <div v-for="product in products" :key="product.id" class="product" @click="openModal(product.id)">
+                <img :src="product.img" :alt="product.name" class="product_img" />
+
+                <div class="product_info">
+                    <span class="product_price">{{product.price}}</span>
+                    <h2 class="product_name">{{product.name}}</h2>
+                </div>
+            </div>
+        </section>
+
         <section class="modal" v-if="modalHasProduct" @click="closeModal">
             <div class="modal_product">
                 <div class="modal_product_img">
@@ -22,7 +40,10 @@
                     <span class="modal_product_price">{{product.price}}</span>
                     <h2 class="modal_product_name">{{product.name}}</h2>
                     <p>{{product.description}}</p>
-                    <button class="modal_btn">Adicionar Item</button>
+                    <button v-if="product.inventory > 0" class="modal_btn" @click="addItemToCart(product)">Adicionar Item</button>
+                    <button v-else class="modal_btn sold_off" disabled>Produto Esgotado</button>
+
+                    <button v-if="checkProductInCart(product)" class="modal_btn" @click="removeItemFromCart(product)">Remover Item</button>
                 </div>
                 <div class="modal_reviews">
                     <h2 class="modal_reviews_subtitle">Avaliações</h2>
@@ -32,17 +53,6 @@
                             <p class="modal_review_name">{{review.name}} | {{review.stars}}</p>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="products">
-            <div v-for="product in products" :key="product.id" class="product" @click="openModal(product.id)">
-                <img :src="product.img" :alt="product.name" class="product_img" />
-
-                <div class="product_info">
-                    <span class="product_price">{{product.price}}</span>
-                    <h2 class="product_name">{{product.name}}</h2>
                 </div>
             </div>
         </section>
