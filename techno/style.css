@@ -52,7 +52,7 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-  }
+}
 
 /* Lista products */
 .products {
@@ -112,7 +112,7 @@ body {
     align-items: end;
     grid-gap: 50px;
     padding: 50px 50px 50px 0;
-    animation: fadeIn .4s forwards;
+    animation: fadeIn .3s forwards;
 }
 
 @keyframes fadeIn {
@@ -178,8 +178,7 @@ body {
     background: #808080;
 }
 
-/* AVALIACOES */
-
+/* Reviews */
 .modal_reviews {
     grid-column: 2;
 }
@@ -200,4 +199,40 @@ body {
 
 .modal_review_name {
     font-weight: bold;
+}
+
+/* Alert */
+.alert {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.alert.active {
+    display: block;
+    animation: fadeInDown .3s forwards;
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translate3d(0, -30px, 0);
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0px, 0);
+    }
+}
+
+.alert_message {
+    background: #ffffff;
+    display: inline-block;
+    padding: 20px 40px;
+    border: 2px solid black;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, .1), 0px 4px 10px rgba(0, 0, 0, .2);
 }
