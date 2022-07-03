@@ -15,7 +15,7 @@
         <header class="header">
             <img src="./assets/techno.svg" alt="techno" class="logo"/>
             <div class="cart_menu">
-                <p>{{cartTotal}} | {{cart.length}}</p>
+                <p>{{filterCurrency(cartTotal)}} | {{cart.length}}</p>
             </div>
         </header>
 
@@ -24,7 +24,7 @@
                 <img :src="product.img" :alt="product.name" class="product_img" />
 
                 <div class="product_info">
-                    <span class="product_price">{{product.price}}</span>
+                    <span class="product_price">{{filterCurrency(product.price)}}</span>
                     <h2 class="product_name">{{product.name}}</h2>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal_product_info">
                 <button @click="modalHasProduct = !modalHasProduct" class="modal_close">X</button>
-                    <span class="modal_product_price">{{product.price}}</span>
+                    <span class="modal_product_price">{{filterCurrency(product.price)}}</span>
                     <h2 class="modal_product_name">{{product.name}}</h2>
                     <p>{{product.description}}</p>
                     <button v-if="product.inventory > 0" class="modal_btn" @click="addItemToCart(product)">Adicionar Item</button>
