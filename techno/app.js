@@ -18,55 +18,69 @@ createApp({
                     this.products = products
                 })
         },
-        getProduct(id){
+        getProduct(id) {
             fetch(`./api/products/${id}/dados.json`)
-            .then(resp => resp.json())
-            .then(product => {
-                this.product = product
-            })
+                .then(resp => resp.json())
+                .then(product => {
+                    this.product = product
+                })
             this.modalHasProduct = true
         },
-        closeModal({target, currentTarget}){
+        closeModal({ target, currentTarget }) {
             if (target === currentTarget) this.modalHasProduct = false
         },
-        openModal(id){
+        openModal(id) {
             this.getProduct(id)
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             })
         },
-        addItemToCart(product){
+        addItemToCart(product) {
             const { id, name, price } = product
 
             this.product.inventory -= 1
-            this.cart.push({id, name, price})
+            this.cart.push({ id, name, price })
             this.cartTotal += price
         },
-        removeItemFromCart(product){
+        removeItemFromCart(product) {
             const { id, price } = product
 
             this.product.inventory += 1
             this.cart.splice(id, 1)
             this.cartTotal -= price
         },
-        checkProductInCart(product){
+        checkProductInCart(product) {
             if (this.cart.length > 0)
-            {
                 return this.cart.find(item => item.id === product.id)
-            }
 
             return false
-        }
+        },
+        filterCurrency(currency) {
+            if (currency)
+                return currency.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+
+            return 0
+        },
+        checkLocalStorage() {
+            if (window.localStorage.cart)
+                this.cart = JSON.parse(window.localStorage.cart)
+
+            this.cart.map(item => {
+                this.cartTotal += item.price
+            })
+        },
+        populateLocalStorage() {
+            window.localStorage.cart = JSON.stringify(this.cart)
+        },
     },
     watch: {
-        products(){
-            this.products.map(item => {
-                item.price = item.price.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
-            })
-        }
+        cartTotal() {
+            this.populateLocalStorage()
+        },
     },
     created() {
         this.getProducts()
+        this.checkLocalStorage()
     }
 }).mount("#app")
