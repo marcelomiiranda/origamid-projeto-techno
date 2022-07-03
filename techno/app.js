@@ -8,6 +8,8 @@ createApp({
             modalHasProduct: false,
             cart: [],
             cartTotal: 0,
+            messageAlert: '',
+            alertActive: false,
         }
     },
     methods: {
@@ -28,6 +30,7 @@ createApp({
         },
         closeModal({ target, currentTarget }) {
             if (target === currentTarget) this.modalHasProduct = false
+            this.modifyTitleAndUrl()
         },
         openModal(id) {
             this.getProduct(id)
@@ -42,13 +45,17 @@ createApp({
             this.product.inventory -= 1
             this.cart.push({ id, name, price })
             this.cartTotal += price
+
+            this.alert(`${name} adicionado ao carrinho.`)
         },
         removeItemFromCart(product) {
-            const { id, price } = product
+            const { id, name, price } = product
 
             this.product.inventory += 1
             this.cart.splice(id, 1)
             this.cartTotal -= price
+
+            this.alert(`${name} removido do carrinho.`)
         },
         checkProductInCart(product) {
             if (this.cart.length > 0)
@@ -73,14 +80,35 @@ createApp({
         populateLocalStorage() {
             window.localStorage.cart = JSON.stringify(this.cart)
         },
+        alert(message) {
+            this.messageAlert = message
+            this.alertActive = true
+            setInterval(() => {
+                this.alertActive = false
+            }, 2000)
+        },
+        modifyTitleAndUrl(name, id) {
+            document.title = name || "Techno"
+            history.pushState(null, null, `#${id || ''}`)
+        },
+        router() {
+            const hash = document.location.hash.replace('#','')
+
+            if (hash)
+                this.getProduct(hash)
+        },
     },
     watch: {
         cartTotal() {
             this.populateLocalStorage()
         },
+        product() {
+            this.modifyTitleAndUrl(this.product.name, this.product.id)
+        }
     },
     created() {
         this.getProducts()
+        this.router()
         this.checkLocalStorage()
     }
 }).mount("#app")
