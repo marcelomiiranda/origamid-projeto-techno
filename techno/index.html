@@ -14,7 +14,7 @@
 
         <header class="header">
             <img src="./assets/techno.svg" alt="techno" class="logo"/>
-            <div class="cart_menu">
+            <div class="cart_menu" @click="showCart = !showCart">
                 <p>{{filterCurrency(cartTotal)}} | {{cart.length}}</p>
             </div>
         </header>
@@ -40,10 +40,8 @@
                     <span class="modal_product_price">{{filterCurrency(product.price)}}</span>
                     <h2 class="modal_product_name">{{product.name}}</h2>
                     <p>{{product.description}}</p>
-                    <button v-if="product.inventory > 0" class="modal_btn" @click="addItemToCart(product)">Adicionar Item</button>
+                    <button v-if="product.inventory > 0" class="modal_btn" @click="addItemToCart()">Adicionar Item</button>
                     <button v-else class="modal_btn sold_off" disabled>Produto Esgotado</button>
-
-                    <button v-if="checkProductInCart(product)" class="modal_btn" @click="removeItemFromCart(product)">Remover Item</button>
                 </div>
                 <div class="modal_reviews">
                     <h2 class="modal_reviews_subtitle">Avaliações</h2>
@@ -54,6 +52,25 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </section>
+        
+        <section class="cart_modal" :class="{active: showCart}">
+            <div class="cart_container">
+            <button class="modal_close" @click="showCart = false">X</button>
+                <h2 class="cart_title">Carinho</h2>
+                <div v-if="cart.length > 0">
+                    <ul class="cart_list">
+                        <li v-for="(item, index) in cart" :keys="item.id" class="cart_item">
+                            <p>Name: {{item.name}}</p>
+                            <p class="cart_price">Price: {{item.price}}</p>
+                            <button class="cart_remove" @click="removeItemFromCart(index)">X</button>
+                        </li>
+                    </ul>
+                    <p class="cart_total">{{filterCurrency(cartTotal)}}</p>
+                    <button class="modal_btn">Finalizar Compra</button>
+                </div>
+                <p v-else>O carrinho está vazio</p>
             </div>
         </section>
 
