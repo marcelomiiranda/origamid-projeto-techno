@@ -10,6 +10,7 @@ createApp({
             cartTotal: 0,
             messageAlert: '',
             alertActive: false,
+            showCart: false,
         }
     },
     methods: {
@@ -39,8 +40,8 @@ createApp({
                 behavior: "smooth"
             })
         },
-        addItemToCart(product) {
-            const { id, name, price } = product
+        addItemToCart() {
+            const { id, name, price } = this.product
 
             this.product.inventory -= 1
             this.cart.push({ id, name, price })
@@ -48,11 +49,10 @@ createApp({
 
             this.alert(`${name} adicionado ao carrinho.`)
         },
-        removeItemFromCart(product) {
-            const { id, name, price } = product
+        removeItemFromCart(index) {
+            const { name, price } = this.product
 
-            this.product.inventory += 1
-            this.cart.splice(id, 1)
+            this.cart.splice(index, 1)
             this.cartTotal -= price
 
             this.alert(`${name} removido do carrinho.`)
