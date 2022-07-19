@@ -3,7 +3,7 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            products: {},
+            productList: {},
             product: {},
             modalHasProduct: false,
             cart: [],
@@ -18,7 +18,7 @@ createApp({
             fetch('./api/products.json')
                 .then(resp => resp.json())
                 .then(products => {
-                    this.products = products
+                    this.productList = products
                 })
         },
         getProduct(id) {
@@ -56,12 +56,6 @@ createApp({
             this.cartTotal -= price
 
             this.alert(`${name} removido do carrinho.`)
-        },
-        checkProductInCart(product) {
-            if (this.cart.length > 0)
-                return this.cart.find(item => item.id === product.id)
-
-            return false
         },
         filterCurrency(currency) {
             if (currency)

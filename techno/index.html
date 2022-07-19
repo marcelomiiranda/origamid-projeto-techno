@@ -20,12 +20,12 @@
         </header>
 
         <section class="products">
-            <div v-for="product in products" :key="product.id" class="product" @click="openModal(product.id)">
-                <img :src="product.img" :alt="product.name" class="product_img" />
+            <div v-for="item in productList" :key="item.id" class="product" @click="openModal(item.id)">
+                <img :src="item.img" :alt="item.name" class="product_img" />
 
                 <div class="product_info">
-                    <span class="product_price">{{filterCurrency(product.price)}}</span>
-                    <h2 class="product_name">{{product.name}}</h2>
+                    <span class="product_price">{{filterCurrency(item.price)}}</span>
+                    <h2 class="product_name">{{item.name}}</h2>
                 </div>
             </div>
         </section>
