@@ -31,7 +31,7 @@ createApp({
         },
         closeModal({ target, currentTarget }) {
             if (target === currentTarget) this.modalHasProduct = false
-            this.modifyTitleAndUrl()
+            this.modifyTitleAndUrl(true)
         },
         openModal(id) {
             this.getProduct(id)
@@ -87,15 +87,19 @@ createApp({
                 this.alertActive = false
             }, 2000)
         },
-        modifyTitleAndUrl(name, id) {
-            document.title = name || "Techno"
-            history.pushState(null, null, `#${id || ''}`)
+        modifyTitleAndUrl(home) {
+            document.title = !home ? this.product.name || "Techno" : "Techno"
+            history.pushState(null, null, `#${!home ? this.product.id || '' : ''}`)
         },
         router() {
-            const hash = document.location.hash.replace('#','')
+            const hash = document.location.hash.replace('#', '')
 
             if (hash)
                 this.getProduct(hash)
+        },
+        checkProductInventory() {
+            if (this.cart && this.product)
+                this.product.inventory -= this.cart.filter(product => product.id === this.product.id).length
         },
     },
     watch: {
@@ -103,7 +107,8 @@ createApp({
             this.populateLocalStorage()
         },
         product() {
-            this.modifyTitleAndUrl(this.product.name, this.product.id)
+            this.modifyTitleAndUrl()
+            this.checkProductInventory()
         }
     },
     created() {
