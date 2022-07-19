@@ -50,7 +50,7 @@ createApp({
             this.alert(`${name} adicionado ao carrinho.`)
         },
         removeItemFromCart(index) {
-            const { name, price } = this.product
+            const { name, price } = this.cart[index]
 
             this.cart.splice(index, 1)
             this.cartTotal -= price
